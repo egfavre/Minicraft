@@ -16,6 +16,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	TextureRegion left;
 	static final int WIDTH = 16;
 	static final int HEIGHT = 16;
+	static final int FINAL_WIDTH = WIDTH * 5;
+	static final int FINAL_HEIGHT = HEIGHT * 5;
 
 	@Override
 	public void create () {
@@ -38,7 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(img, 0, 0, FINAL_WIDTH, FINAL_HEIGHT);
 		batch.end();
 	}
 }
