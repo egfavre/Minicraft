@@ -49,6 +49,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		move();
 		time += Gdx.graphics.getDeltaTime();
 		TextureRegion img;
+		if (x > 600){
+			x = 0;
+		}
+		if (x < -0){
+			x = 600;
+		}
+
 		if (y>0) {
 			img = up;
 		}
