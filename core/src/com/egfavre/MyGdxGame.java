@@ -16,6 +16,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	TextureRegion up;
 	TextureRegion right;
 	TextureRegion left;
+	TextureRegion groundTiles;
 	static final int WIDTH = 16;
 	static final int HEIGHT = 16;
 	static final int FINAL_WIDTH = WIDTH * 5;
@@ -34,7 +35,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 //add player tiles
 		Texture tiles = new Texture("tiles.png");
+		Texture ground = new Texture("groundtiles.png");
 		TextureRegion[][] grid = TextureRegion.split(tiles, WIDTH, HEIGHT);
+		TextureRegion[][] grid2 = TextureRegion.split(ground, WIDTH, HEIGHT);
+		groundTiles = grid2[0][0];
 		down = grid[6][0];
 		up = grid[6][1];
 		right = grid[6][3];
@@ -43,8 +47,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		walk = new Animation(0.2f, grid[6][0], grid[6][2]);
 	}
 
-	@Override
-	public void render () {
+
+
+
+
+
+		@Override
+		public void render () {
 
 		move();
 		time += Gdx.graphics.getDeltaTime();
@@ -68,10 +77,15 @@ public class MyGdxGame extends ApplicationAdapter {
 
 
 
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0f, .5f, 1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		batch.begin();
-		if (faceRight) {
+			TextureRegion bkgrndGround;
+			bkgrndGround = groundTiles;
+			batch.draw(groundTiles, 0, 0, FINAL_WIDTH*10, FINAL_HEIGHT*2);
+
+			if (faceRight) {
 			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
 		}
 		else {
