@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -25,6 +26,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	static final float MAX_JUMP_VELOCITY = 2000;
 	static final float DECELERATION = 0.95f;
 	static final int GRAVITY = -50;
+	Animation walk;
 
 
 	@Override
@@ -38,6 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		right = grid[6][3];
 		left = new TextureRegion(right);
 		left.flip(true, false);
+		walk = new Animation(0.2f, grid[6][0], grid[6][2]);
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			img = up;
 		}
 		else if (xv != 0) {
-			img = right;
+			img = walk.getKeyFrame(time, true);
 		}
 		else {
 			img = left;
