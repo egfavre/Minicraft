@@ -17,6 +17,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	TextureRegion right;
 	TextureRegion left;
 	TextureRegion groundTiles;
+	Texture pineTree;
+	Texture sky;
 	static final int WIDTH = 16;
 	static final int HEIGHT = 16;
 	static final int FINAL_WIDTH = WIDTH * 5;
@@ -33,9 +35,11 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-//add player tiles
+
 		Texture tiles = new Texture("tiles.png");
 		Texture ground = new Texture("groundtiles.png");
+		pineTree = new Texture("PineTree.png");
+		sky = new Texture("Daytime_Background_1024x800.png");
 		TextureRegion[][] grid = TextureRegion.split(tiles, WIDTH, HEIGHT);
 		TextureRegion[][] grid2 = TextureRegion.split(ground, WIDTH, HEIGHT);
 		groundTiles = grid2[0][0];
@@ -81,9 +85,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-			TextureRegion bkgrndGround;
-			bkgrndGround = groundTiles;
+			batch.draw(sky, 0, 50, FINAL_WIDTH*10, FINAL_HEIGHT*6);
 			batch.draw(groundTiles, 0, 0, FINAL_WIDTH*10, FINAL_HEIGHT*2);
+			batch.draw(pineTree, 50, 50, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
+			batch.draw(pineTree, 250, 100, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
 
 			if (faceRight) {
 			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
@@ -91,6 +96,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		else {
 			batch.draw(img, x + FINAL_WIDTH, y, -FINAL_WIDTH, FINAL_HEIGHT);
 		}
+		batch.draw(pineTree, 200, 0, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
+		batch.draw(pineTree, 400, 2, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
 		batch.end();
 	}
 
