@@ -83,17 +83,25 @@ public class MyGdxGame extends ApplicationAdapter {
 			batch.draw(ratStand, ratX, 0);
 
 			if (faceRight) {
-			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
-			} else {
+			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);}
+			else {
 			batch.draw(img, x + FINAL_WIDTH, y, -FINAL_WIDTH, FINAL_HEIGHT);
 			}
 
 			batch.draw(pineTree, 200, 0, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
 			batch.draw(pineTree, 400, 2, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
+			contact();
 			batch.end();
 			i++;
+
+
 		}
 
+	public void contact(){
+		if (x == ratX){
+			batch.draw(youDied, 0, 0);
+		}
+	}
 
 	public void move(){
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) && canJump){
