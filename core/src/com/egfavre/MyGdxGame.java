@@ -70,39 +70,29 @@ public class MyGdxGame extends ApplicationAdapter {
 				img = left;
 			}
 
-
 			ratStand = ratAttack.getKeyFrame(time, true);
-
-
-
-				Gdx.gl.glClearColor(0f, .5f, 1f, 1);
-				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			Gdx.gl.glClearColor(0f, .5f, 1f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 			batch.begin();
+			ratX = RIGHT_EDGE - i;
 			batch.draw(sky, 0, 50, FINAL_WIDTH * 10, FINAL_HEIGHT * 6);
-				batch.draw(groundTiles, 0, 0, FINAL_WIDTH * 10, FINAL_HEIGHT * 2);
-				batch.draw(pineTree, 50, 50, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
-				batch.draw(pineTree, 250, 100, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
-				batch.draw(ratStand, RIGHT_EDGE - i, 0);
+			batch.draw(groundTiles, 0, 0, FINAL_WIDTH * 10, FINAL_HEIGHT * 2);
+			batch.draw(pineTree, 50, 50, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
+			batch.draw(pineTree, 250, 100, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
+			batch.draw(ratStand, ratX, 0);
 
 			if (faceRight) {
-					batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
-				} else {
-					batch.draw(img, x + FINAL_WIDTH, y, -FINAL_WIDTH, FINAL_HEIGHT);
-				}
-
-				batch.draw(pineTree, 200, 0, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
-				batch.draw(pineTree, 400, 2, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
-			if (x == ratX && y != 0) {
-				x = 300;
-				y = 300;
-
-
+			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
+			} else {
+			batch.draw(img, x + FINAL_WIDTH, y, -FINAL_WIDTH, FINAL_HEIGHT);
 			}
-				batch.end();
+
+			batch.draw(pineTree, 200, 0, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
+			batch.draw(pineTree, 400, 2, FINAL_WIDTH * 2.5f, FINAL_HEIGHT * 2.5f);
+			batch.end();
 			i++;
-
-			}
+		}
 
 
 	public void move(){
