@@ -11,31 +11,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	float time;
-	TextureRegion down;
-	TextureRegion up;
-	TextureRegion right;
-	TextureRegion left;
-	TextureRegion groundTiles;
-	Texture pineTree;
-	Texture sky;
+	float time, x, y, xv, yv;
+	TextureRegion down, up, right, left, groundTiles;
+	Texture pineTree, sky;
 	static final int WIDTH = 16;
 	static final int HEIGHT = 16;
 	static final int FINAL_WIDTH = WIDTH * 5;
 	static final int FINAL_HEIGHT = HEIGHT * 5;
-	float x, y, xv, yv;
-	boolean canJump, faceRight = true;
 	static final float MAX_VELOCITY = 300;
 	static final float MAX_JUMP_VELOCITY = 2000;
 	static final float DECELERATION = 0.95f;
 	static final int GRAVITY = -50;
+	boolean canJump, faceRight = true;
 	Animation walk;
-
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
 		Texture tiles = new Texture("tiles.png");
 		Texture ground = new Texture("groundtiles.png");
 		pineTree = new Texture("PineTree.png");
@@ -51,23 +43,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		walk = new Animation(0.2f, grid[6][0], grid[6][2]);
 	}
 
-
-
-
-
-
 		@Override
 		public void render () {
-
 		move();
 		time += Gdx.graphics.getDeltaTime();
 		TextureRegion img;
-		if (x > 600){
-			x = 0;
-		}
-		if (x < -0){
-			x = 600;
-		}
+		wrapScreen();
 
 		if (y>0) {
 			img = up;
@@ -79,23 +60,22 @@ public class MyGdxGame extends ApplicationAdapter {
 			img = left;
 		}
 
-
-
 		Gdx.gl.glClearColor(0f, .5f, 1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-			batch.draw(sky, 0, 50, FINAL_WIDTH*10, FINAL_HEIGHT*6);
-			batch.draw(groundTiles, 0, 0, FINAL_WIDTH*10, FINAL_HEIGHT*2);
-			batch.draw(pineTree, 50, 50, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
-			batch.draw(pineTree, 250, 100, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
+		batch.draw(sky, 0, 50, FINAL_WIDTH*10, FINAL_HEIGHT*6);
+		batch.draw(groundTiles, 0, 0, FINAL_WIDTH*10, FINAL_HEIGHT*2);
+		batch.draw(pineTree, 50, 50, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
+		batch.draw(pineTree, 250, 100, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
 
-			if (faceRight) {
+		if (faceRight) {
 			batch.draw(img, x, y, FINAL_WIDTH, FINAL_HEIGHT);
 		}
 		else {
 			batch.draw(img, x + FINAL_WIDTH, y, -FINAL_WIDTH, FINAL_HEIGHT);
 		}
+
 		batch.draw(pineTree, 200, 0, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
 		batch.draw(pineTree, 400, 2, FINAL_WIDTH*2.5f, FINAL_HEIGHT*2.5f);
 		batch.end();
@@ -149,5 +129,14 @@ public class MyGdxGame extends ApplicationAdapter {
 			velocity = 0;
 		}
 		return velocity;
+	}
+
+	public void wrapScreen(){
+		if (x > 600){
+			x = 0;
+		}
+		if (x < -0){
+			x = 600;
+		}
 	}
 }
